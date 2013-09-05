@@ -58,6 +58,19 @@ package 'postfix'
 package 'postfix-pcre'
 package 'dk-filter'
 
+#add backports repo
+script "add-backport-deb" do
+  interpreter "bash"
+  user "root"
+  cwd "/tmp"
+  code <<-EOH
+      echo 'deb http://archive.ubuntu.com/ubuntu precise-backports main restricted universe multiverse' >> /etc/apt/sources.list
+      apt-get update
+  EOH
+
+  not_if "cat /etc/apt/sources.list | grep precise-backports"
+end
+
 script "install-open-dkim" do
   interpreter "bash"
   user "root"
