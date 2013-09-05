@@ -45,7 +45,7 @@ script "add-domain-to-hosts-file" do
 end
 
 execute "create-deploy-dirs" do
-  command "mkdir -p ~/deploy/domain-keys && mkdir -p ~/deploy/utils"
+  command "mkdir -p ~/deploy/domain-keys && mkdir -p ~/deploy/utils && mkdir -p /etc/mail"
 end
 
 #configure postfix
