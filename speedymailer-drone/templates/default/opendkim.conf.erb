@@ -1,0 +1,16 @@
+Syslog                  yes
+UMask                   002
+Domain                  <%= @domain %> 
+KeyFile                 /etc/mail/dkim.key
+Selector                mail
+
+# Commonly-used options; the commented-out versions show the defaults.
+AutoRestart             yes
+Background              yes
+Canonicalization        simple
+DNSTimeout              5
+Mode                    sv
+SignatureAlgorithm      rsa-sha256
+SubDomains              no
+InternalHosts          /etc/mail/dkim-InternalHosts.txt
+

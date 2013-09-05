@@ -1,0 +1,3 @@
+DAEMON_OPTS="-l"
+DAEMON_OPTS="$DAEMON_OPTS -d <%= @domain %> -s /etc/mail/domainkey.key -S maildk"
+SOCKET="inet:8892@localhost" # listen on loopback on port 8892
