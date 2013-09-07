@@ -146,6 +146,8 @@ end
 
 #setup rsyslog logging to speedymailer reader and then to elastic
 
+package 'rsyslog'
+
 template "/etc/rsyslog.d/10-speedymailer.conf" do
   source "10-speedymailer.conf.erb"
   mode 0664
