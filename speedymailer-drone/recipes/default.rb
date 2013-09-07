@@ -171,7 +171,7 @@ script "install tmuxifier" do
         echo 'export PATH="~/.tmuxifier/bin:$PATH"' >> ~/.bash_profile
   EOH
   
-  not if "grep tmuxifier ~/.bash_profile" 
+  not_if "grep tmuxifier ~/.bash_profile" 
 end
 
 template "#{File.expand_path('~')}/.tmuxifier/layouts/drone.session.sh" do
