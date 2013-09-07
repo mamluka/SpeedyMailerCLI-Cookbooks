@@ -172,7 +172,7 @@ script "install tmuxifier" do
   EOH
 end
 
-template "#{File.expand_path('~')}/.tmuxifier/layouts" do
+template "#{File.expand_path('~')}/.tmuxifier/layouts/drone.session.sh" do
   source "drone.session.sh.erb"
   variables({
                 :drone_domain => node[:drone][:domain]
