@@ -168,8 +168,10 @@ script "install tmuxifier" do
   cwd "/tmp"
   code <<-EOH
         git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
-        echo 'export PATH="~/.tmuxifier/bin:$PATH"' >> ~/.bashrc
+        echo 'export PATH="~/.tmuxifier/bin:$PATH"' >> ~/.bash_profile
   EOH
+  
+  not if "grep tmuxifier ~/.bash_profile" 
 end
 
 template "#{File.expand_path('~')}/.tmuxifier/layouts/drone.session.sh" do
