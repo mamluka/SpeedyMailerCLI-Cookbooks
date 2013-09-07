@@ -13,8 +13,8 @@ minimal_backoff_time = 52w
 
 milter_default_action = accept
 milter_protocol = 2
-smtpd_milters = inet:localhost:8891,inet:localhost:8892
-non_smtpd_milters = inet:localhost:8891,inet:localhost:8892
+smtpd_milters = inet:127.0.0.1:8891,inet:127.0.0.1:8892
+non_smtpd_milters = inet:127.0.0.1:8891,inet:127.0.0.1:8892
 
 header_checks = pcre:/etc/postfix/header_checks
 
