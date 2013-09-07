@@ -158,7 +158,7 @@ end
 template "#{File.expand_path('~')}/SpeedyMailerCLI/drones/config.json" do
   source "config.json.erb"
   variables({
-                :domain_domain => node[:drone][:domain],
+                :drone_domain => node[:drone][:domain],
                 :master_domain => node[:drone][:master]
             })
 end
