@@ -10,7 +10,7 @@ new_window "jobs"
 run_cmd "cd SpeedyMailerCLI/drones && sidekiq -q <%= @drone_domain %> -r ./start-drone.rb"
 
 new_window "http"
-run_cmd "cd SpeedyMailerCLI/drones && ruby drone-http.rb"
+run_cmd "cd SpeedyMailerCLI/drones/http && rackup -p 8080"
 
 new_window "report"
 run_cmd "cd SpeedyMailerCLI/drones && clockwork report-drone-to-master.rb"
