@@ -171,3 +171,11 @@ template "/etc/rsyslog.d/10-mongodb.conf" do
   owner "root"
   group "root"
 end
+
+template "~/SpeedyMailerCLI/drones/config.json" do
+  source "config.json.erb"
+  variables({
+                :domain_domain => node[:drone][:domain],
+                :master_domain => node[:drone][:master]
+            })
+end
