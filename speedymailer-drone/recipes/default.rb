@@ -219,7 +219,7 @@ end
 
 execute "remove-default-site" do
   command "rm /etc/nginx/sites-enabled/default"
-  if "test -f /etc/nginx/sites-enabled/default"
+  only_if "test -f /etc/nginx/sites-enabled/default"
 end
 
 service "nginx" do
