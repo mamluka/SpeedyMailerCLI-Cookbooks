@@ -180,3 +180,8 @@ template "#{File.expand_path('~')}/.tmuxifier/layouts/drone.session.sh" do
                 :drone_domain => node[:drone][:domain]
             })
 end
+
+#setup the redis url to use in sidekiq
+execute "setup-master-redis-url" do
+  command "export REDIS_URL=#redis://#{node[:drone][:master]}:6379/0""
+end
