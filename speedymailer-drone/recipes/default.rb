@@ -124,9 +124,7 @@ script "create-domain-key" do
   not_if "test -f /deploy/domain-keys/domain-keys-dns.txt"
 end
 
-service "postfix" do
-  action :start
-end
+
 
 service "opendkim" do
   action :restart
@@ -146,13 +144,22 @@ script "setup drone alias" do
   EOH
 end
 
-#setup rsyslog logging to mongo
+#setup rsyslog logging to speedymailer reader and then to elastic
 
-template "/etc/rsyslog.d/10-mongodb.conf" do
-  source "10-mongodb.conf.erb"
+template "/etc/rsyslog.d/10-speedymailer.conf" do
+  source "10-speedymailer.conf.erb"
   mode 0664
   owner "root"
   group "root"
+end
+
+
+execute "cconfigure-rvm-path-for-rsyyslog" do
+  command "bash ~/SpeedyMailerCLI/drones/configure-rsyslog-reader.sh"
+end
+
+service "rsyslog" do
+  action :restart
 end
 
 template "#{File.expand_path('~')}/SpeedyMailerCLI/drones/config.json" do
@@ -183,5 +190,9 @@ end
 
 #setup the redis url to use in sidekiq
 execute "setup-master-redis-url" do
-  command "export REDIS_URL=#redis://#{node[:drone][:master]}:6379/0""
+  command "echo 'export REDIS_URL=redis://#{node[:drone][:master]}:6379/0' >> ~/.bash_profile"
+end
+
+service "postfix" do
+  action :start
 end
