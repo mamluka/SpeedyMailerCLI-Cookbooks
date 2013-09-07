@@ -193,6 +193,34 @@ execute "setup-master-redis-url" do
   command "echo 'export REDIS_URL=redis://#{node[:drone][:master]}:6379/0' >> ~/.bash_profile"
 end
 
+#install nginx
+
+apt_repository "nginx" do
+  uri "http://ppa.launchpad.net/nginx/stable/ubuntu/"
+  distribution node['lsb']['codename']
+  components ["main"]
+  keyserver "keyserver.ubuntu.com"
+  key "C300EE8C"
+  deb_src true
+
+  not_if "cat /etc/apt/sources.list.d/* | grep nginx"
+end
+
+package 'nginx'
+
+template "/etc/nginx/sites-enabled/drone-site" do
+  source "drone-site.erb"
+  variables({
+                :drone_domain => node[:drone][:domain]
+            })
+end
+
+service "nginx" do
+  action :restart
+end
+
+
+# start things
 service "postfix" do
   action :start
 end
