@@ -215,6 +215,10 @@ template "/etc/nginx/sites-enabled/drone-site" do
             })
 end
 
+execute "remove-default-site" do
+  command "rm /etc/nginx/sites-enabled/default"
+end
+
 service "nginx" do
   action :restart
 end
