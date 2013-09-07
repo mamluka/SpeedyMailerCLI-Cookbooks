@@ -117,8 +117,8 @@ script "create-domain-key" do
       openssl rsa -in private.key -out public.key -pubout -outform PEM
       cp private.key /etc/mail/domainkey.key
       cp public.key /deploy/domain-keys/domain-keys-dns.txt
-      service dk-filter stop
-      service dk-filter start
+      sudo service dk-filter stop
+      sudo service dk-filter start
   EOH
 
   not_if "test -f /deploy/domain-keys/domain-keys-dns.txt"
