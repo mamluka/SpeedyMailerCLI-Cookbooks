@@ -1,3 +1,3 @@
 file_cache_path "/tmp"
-cookbook_path "/home/davidmz/SpeedyMailerCLI-Cookbooks"
+cookbook_path "homedir/SpeedyMailerCLI-Cookbooks"
 
