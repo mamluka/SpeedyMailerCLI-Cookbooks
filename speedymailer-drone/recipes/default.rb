@@ -225,8 +225,12 @@ service "nginx" do
   action :restart
 end
 
-
 # start things
 service "postfix" do
   action :start
+end
+
+#redister dns records
+execute "remove-default-site" do
+  command "ruby #{File.expand_path('~')}/SpeedyMailerCLI/drones/scripts/create-dns-records.rb"
 end
