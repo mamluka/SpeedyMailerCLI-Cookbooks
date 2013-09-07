@@ -162,3 +162,19 @@ template "#{File.expand_path('~')}/SpeedyMailerCLI/drones/config.json" do
                 :master_domain => node[:drone][:master]
             })
 end
+
+script "install tmuxifier" do
+  interpreter "bash"
+  cwd "/tmp"
+  code <<-EOH
+        git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
+        echo 'export PATH="~/.tmuxifier/bin:$PATH"' >> ~/.bashrc
+  EOH
+end
+
+template "#{File.expand_path('~')}/.tmuxifier/layouts" do
+  source "drone.session.sh.erb"
+  variables({
+                :drone_domain => node[:drone][:domain]
+            })
+end
