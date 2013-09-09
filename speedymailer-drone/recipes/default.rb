@@ -233,7 +233,7 @@ end
 
 #run bundler
 
-execute "remove-default-site" do
+execute "run-bundler" do
   command "cd #{File.expand_path('~')}/SpeedyMailerCLI/drones && bundle"
 end
 
