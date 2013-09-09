@@ -190,6 +190,7 @@ script "install tmuxifier" do
   code <<-EOH
         git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
         echo 'export PATH="~/.tmuxifier/bin:$PATH"' >> ~/.bash_profile
+        export PATH="~/.tmuxifier/bin:$PATH"
   EOH
   
   not_if "grep tmuxifier ~/.bash_profile" 
