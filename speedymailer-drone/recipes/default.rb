@@ -237,8 +237,8 @@ execute "remove-default-site" do
   command "cd #{File.expand_path('~')}/SpeedyMailerCLI/drones && bundle"
 end
 
-#redister dns records
-execute "remove-default-site" do
+#register dns records
+execute "register-dns-records" do
   command "ruby #{File.expand_path('~')}/SpeedyMailerCLI/drones/scripts/create-dns-records.rb"
 end
 
