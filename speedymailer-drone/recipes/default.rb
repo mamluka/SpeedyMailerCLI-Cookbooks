@@ -156,7 +156,9 @@ apt_repository "rsyslog" do
   deb_src true
 end
 
-package 'rsyslog'
+package 'rsyslog' do
+  action :upgrade
+end
 
 template "/etc/rsyslog.d/10-speedymailer.conf" do
   source "10-speedymailer.conf.erb"
