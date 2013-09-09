@@ -23,6 +23,7 @@ script "add-domain-to-hosts-file" do
                 
         echo "#{node[:drone][:ip]} mail.#{node[:drone][:domain]} mail" >> /etc/hosts
         echo "#{node[:drone][:ip]} localhost.localdomain mail" >> /etc/hosts
+        echo "#{node[:drone][:ip]} localhost" >> /etc/hosts
 
         service hostname restart
   EOH
@@ -158,6 +159,13 @@ end
 
 package 'rsyslog' do
   action :upgrade
+end
+
+template "/etc/rsyslog.conf" do
+  source "rsyslog.conf.erb"
+  mode 0664
+  owner "root"
+  group "root"
 end
 
 template "/etc/rsyslog.d/10-speedymailer.conf" do
