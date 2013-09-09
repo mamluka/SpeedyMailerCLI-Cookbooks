@@ -1,4 +1,5 @@
 package 'mailutils'
+package 'dnsutils'
 
 #stop apache - we don't need it
 service "apache2" do
@@ -146,6 +147,15 @@ end
 
 #setup rsyslog logging to speedymailer reader and then to elastic
 
+apt_repository "rsyslog" do
+  uri "http://ppa.launchpad.net/tmortensen/rsyslogv7/ubuntu/"
+  distribution node['lsb']['codename']
+  components ["main"]
+  keyserver "keyserver.ubuntu.com"
+  key "431533D8"
+  deb_src true
+end
+
 package 'rsyslog'
 
 template "/etc/rsyslog.d/10-speedymailer.conf" do
@@ -204,8 +214,6 @@ apt_repository "nginx" do
   keyserver "keyserver.ubuntu.com"
   key "C300EE8C"
   deb_src true
-
-  not_if "cat /etc/apt/sources.list.d/* | grep nginx"
 end
 
 package 'nginx'
