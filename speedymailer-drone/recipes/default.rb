@@ -13,7 +13,7 @@ file "/etc/hostname" do
 end
 
 #set the domain in the hosts file
-script "add-domain-to-hosts-file" doi
+script "add-domain-to-hosts-file" do
   interpreter "bash"
   user "root"
   cwd "/tmp"
@@ -22,6 +22,7 @@ script "add-domain-to-hosts-file" doi
         cat /etc/hosts | grep -Ev $original_hostname | sudo tee /etc/hosts
                 
         echo "#{node[:drone][:ip]} mail.#{node[:drone][:domain]} mail" >> /etc/hosts
+        echo "#{node[:drone][:ip]} #{node[:drone][:domain]}" >> /etc/hosts
         echo "#{node[:drone][:ip]} localhost.localdomain mail" >> /etc/hosts
         echo "#{node[:drone][:ip]} localhost" >> /etc/hosts
 
