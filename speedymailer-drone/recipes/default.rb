@@ -13,7 +13,7 @@ file "/etc/hostname" do
 end
 
 #set the domain in the hosts file
-script "add-domain-to-hosts-file" do
+script "add-domain-to-hosts-file" doi
   interpreter "bash"
   user "root"
   cwd "/tmp"
@@ -85,6 +85,10 @@ template "/etc/mail/dkim-InternalHosts.txt" do
   mode 0664
   owner "root"
   group "root"
+  
+  variables({
+                :domain => node[:drone][:domain]
+            })
 end
 
 template "/etc/default/dk-filter" do
