@@ -212,10 +212,10 @@ script "install phantomjs" do
   cwd "/tmp"
   code <<-EOH
         wget https://phantomjs.googlecode.com/files/phantomjs-1.9.2-linux-x86_64.tar.bz2
-        mkdir ~/bin
+        mkdir /home/drone/bin
         
-        mv phantomjs-1.9.2-linux-x86_64/bin/phantomjs ~/bin/
-        echo 'export PATH="~/bin:$PATH"' >> ~/.bash_profile
+        mv phantomjs-1.9.2-linux-x86_64/bin/phantomjs /home/drone/bin/
+        echo 'export PATH="~/bin:$PATH"' >> /home/drone/.bash_profile
   EOH
 end
 
