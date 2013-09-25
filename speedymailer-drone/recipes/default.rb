@@ -216,7 +216,7 @@ script "install phantomjs" do
         
         mkdir -p /home/drone/bin
         mv phantomjs-1.9.2-linux-x86_64/bin/phantomjs /home/drone/bin/
-        echo 'export PATH="~/bin:$PATH"' >> /home/drone/.bash_profile
+        echo 'export PATH="~/bin:$PATH"' >> /home/drone/.bashrc
   EOH
 end
 
