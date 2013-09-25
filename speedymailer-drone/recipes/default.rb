@@ -207,6 +207,18 @@ script "install tmuxifier" do
   not_if "grep tmuxifier ~/.bash_profile" 
 end
 
+script "install phantomjs" do
+  interpreter "bash"
+  cwd "/tmp"
+  code <<-EOH
+        wget https://phantomjs.googlecode.com/files/phantomjs-1.9.2-linux-x86_64.tar.bz2
+        mv phantomjs-1.9.2-linux-x86_64/bin/phantomjs ~/bin/
+        
+        mkdir ~/bin
+        echo 'export PATH="~/bin:$PATH"' >> ~/.bash_profile
+  EOH
+end
+
 template "#{File.expand_path('~')}/.tmuxifier/layouts/drone.session.sh" do
   source "drone.session.sh.erb"
   variables({
