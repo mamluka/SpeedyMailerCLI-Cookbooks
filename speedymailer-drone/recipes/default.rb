@@ -207,6 +207,8 @@ script "install tmuxifier" do
   not_if "grep tmuxifier ~/.bash_profile" 
 end
 
+package 'fontconfig'
+
 script "install phantomjs" do
   interpreter "bash"
   cwd "/tmp"
@@ -216,6 +218,8 @@ script "install phantomjs" do
         
         mkdir -p /home/drone/bin
         mv phantomjs-1.9.2-linux-x86_64/bin/phantomjs /home/drone/bin/
+        chown drone:drone /home/drone/bin/phantomjs
+        chmod +x /home/drone/bin/phantomjs 
         echo 'export PATH="~/bin:$PATH"' >> /home/drone/.bashrc
   EOH
 end
