@@ -277,4 +277,16 @@ execute "register-dns-records" do
   command "ruby #{File.expand_path('~')}/SpeedyMailerCLI/drones/scripts/create-dns-records.rb"
 end
 
+#install squid
+package 'squid'
 
+template "/etc/squid3/squid.conf" do
+  source "squid.conf.erb"
+  variables({
+                :drone_ip => node[:drone][:ip]
+            })
+end
+
+service "squid" do
+  action :restart
+end
