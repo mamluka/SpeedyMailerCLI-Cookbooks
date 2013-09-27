@@ -13,7 +13,7 @@ file "/etc/hostname" do
 end
 
 #set the domain in the hosts file
-script "add-domain-to-hosts-file" do
+script "add-domain-to-hosts-file" dob
   interpreter "bash"
   user "root"
   cwd "/tmp"
@@ -202,10 +202,15 @@ script "install tmuxifier" do
   code <<-EOH
         git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
         echo 'export PATH="~/.tmuxifier/bin:$PATH"' >> ~/.bash_profile
-        echo '. ~/bashrc' >> ~/.bash_profile
+        
   EOH
   
   not_if "grep tmuxifier ~/.bash_profile" 
+end
+
+execute "add bashrc to bash profile" do
+  command "echo '. ~/bashrc' >> ~/.bash_profile"
+  not_if "grep ~/bashrc ~/.bash_profile"
 end
 
 package 'fontconfig'
@@ -221,8 +226,14 @@ script "install phantomjs" do
         mv phantomjs-1.9.2-linux-x86_64/bin/phantomjs /home/drone/bin/
         chown drone:drone /home/drone/bin/phantomjs
         chmod +x /home/drone/bin/phantomjs 
-        echo 'export PATH="$HOME/bin:$PATH"' >> /home/drone/.bashrc
+        
   EOH
+end
+
+#add phantim to bashrc
+execute "add phantom js to bashrc" do
+  command "echo 'export PATH=\"$HOME/bin:$PATH\"' >> /home/drone/.bashrc"
+  not_if "grep /bin ~/.bashrc"
 end
 
 template "#{File.expand_path('~')}/.tmuxifier/layouts/drone.session.sh" do
@@ -235,6 +246,7 @@ end
 #setup the redis url to use in sidekiq
 execute "setup-master-redis-url" do
   command "echo 'export REDIS_URL=redis://#{node[:drone][:master]}:6379/0' >> ~/.bash_profile"
+  not_if "grep REDIS_URL ~/.bash_profile"
 end
 
 #install nginx
