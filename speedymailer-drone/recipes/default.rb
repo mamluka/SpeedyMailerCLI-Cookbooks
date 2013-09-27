@@ -13,7 +13,7 @@ file "/etc/hostname" do
 end
 
 #set the domain in the hosts file
-script "add-domain-to-hosts-file" dob
+script "add-domain-to-hosts-file" do
   interpreter "bash"
   user "root"
   cwd "/tmp"
