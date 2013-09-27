@@ -221,7 +221,7 @@ script "install phantomjs" do
         mv phantomjs-1.9.2-linux-x86_64/bin/phantomjs /home/drone/bin/
         chown drone:drone /home/drone/bin/phantomjs
         chmod +x /home/drone/bin/phantomjs 
-        echo 'export PATH="~/bin:$PATH"' >> /home/drone/.bashrc
+        echo 'export PATH="$HOME/bin:$PATH"' >> /home/drone/.bashrc
   EOH
 end
 
