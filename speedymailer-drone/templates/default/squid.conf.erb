@@ -10,7 +10,7 @@ http_access allow allowed_ips
 http_access deny all
 
 http_port 8080
-tcp_outgoing_address 162.210.39.165
+tcp_outgoing_address <%= @drone_ip %>
 coredump_dir /var/spool/squid3
 refresh_pattern ^ftp:           1440    20%     10080
 refresh_pattern ^gopher:        1440    0%      1440
