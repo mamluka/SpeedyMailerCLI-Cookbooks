@@ -7,7 +7,7 @@
 if initialize_session "drone"; then
 
 new_window "jobs"
-run_cmd "cd SpeedyMailerCLI/drones && sidekiq -q <%= @drone_domain %> -r ./start-drone.rb"
+run_cmd "cd SpeedyMailerCLI/drones && sidekiq -q <%= @drone_domain %> -r ./start-drone.rb -c 3"
 
 new_window "http"
 run_cmd "cd SpeedyMailerCLI/drones/http && rackup -p 8080"
