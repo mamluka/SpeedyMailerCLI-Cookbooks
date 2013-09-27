@@ -209,8 +209,8 @@ script "install tmuxifier" do
 end
 
 execute "add bashrc to bash profile" do
-  command "echo '. ~/bashrc' >> ~/.bash_profile"
-  not_if "grep ~/bashrc ~/.bash_profile"
+  command "echo '. ~/.bashrc' >> ~/.bash_profile"
+  not_if "grep ~/.bashrc ~/.bash_profile"
 end
 
 package 'fontconfig'
