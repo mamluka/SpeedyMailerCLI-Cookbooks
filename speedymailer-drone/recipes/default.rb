@@ -287,6 +287,6 @@ template "/etc/squid3/squid.conf" do
             })
 end
 
-service "squid" do
+service "squid3" do
   action :restart
 end
