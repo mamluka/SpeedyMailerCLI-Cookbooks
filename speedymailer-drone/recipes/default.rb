@@ -7,7 +7,7 @@ service "apache2" do
 end
 
 
-#set host to be a mail server
+#set host to be a mail serverl
 file "/etc/hostname" do
   content "mail"
 end
@@ -18,10 +18,8 @@ script "add-domain-to-hosts-file" do
   user "root"
   cwd "/tmp"
   code <<-EOH
-        original_hostname=$(hostname)
-        cat /etc/hosts | grep -Ev $original_hostname | sudo tee /etc/hosts
                 
-        echo "#{node[:drone][:ip]} #{node[:drone][:domain]}" >> /etc/hosts
+        echo "#{node[:drone][:ip]} #{node[:drone][:domain]}" > /etc/hosts
         echo "#{node[:drone][:ip]} localhost.localdomain mail" >> /etc/hosts
         echo "#{node[:drone][:ip]} localhost" >> /etc/hosts
 
