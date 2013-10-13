@@ -7,13 +7,16 @@
 if initialize_session "drone"; then
 
 new_window "jobs"
-run_cmd "cd SpeedyMailerCLI/drones && sidekiq -q <%= @drone_domain %> -r ./start-drone.rb -c 3"
+run_cmd "cd ~/SpeedyMailerCLI/drones && sidekiq -q <%= @drone_domain %> -r ./start-drone.rb -c 3"
 
 new_window "http"
-run_cmd "cd SpeedyMailerCLI/drones/http && rackup -p 8080"
+run_cmd "cd ~/SpeedyMailerCLI/drones/http && rackup -p 8080"
 
 new_window "report"
-run_cmd "cd SpeedyMailerCLI/drones && clockwork report-drone-to-master.rb"
+run_cmd "cd ~/SpeedyMailerCLI/drones && clockwork report-drone-to-master.rb"
+
+new_window "rsyslog"
+run_cmd "cd ~/SpeedyMailerCLI/drones && ruby rsyslog.rb"
 
 new_window "free"
 run_cmd "tmux detach"
