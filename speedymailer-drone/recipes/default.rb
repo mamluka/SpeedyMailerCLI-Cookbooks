@@ -186,6 +186,10 @@ service "rsyslog" do
   action :restart
 end
 
+execute "change log permissions" do
+  command "chmod 655 /var/log/mail.log"
+end
+
 template "#{File.expand_path('~')}/SpeedyMailerCLI/drones/config.json" do
   source "config.json.erb"
   variables({
