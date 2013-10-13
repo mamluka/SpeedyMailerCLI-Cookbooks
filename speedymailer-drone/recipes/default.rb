@@ -170,18 +170,6 @@ template "/etc/rsyslog.conf" do
   group "root"
 end
 
-template "/etc/rsyslog.d/10-speedymailer.conf" do
-  source "10-speedymailer.conf.erb"
-  mode 0664
-  owner "root"
-  group "root"
-end
-
-
-execute "cconfigure-rvm-path-for-rsyyslog" do
-  command "bash ~/SpeedyMailerCLI/drones/configure-rsyslog-reader.sh"
-end
-
 service "rsyslog" do
   action :restart
 end
